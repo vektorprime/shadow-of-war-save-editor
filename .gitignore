@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.pyo
+*.sav
+*.sav.backup
+*.sav.original
+*.sav_FIXED
+*.bin
+*.orig
+.vscode/
+.idea/
+*.swp
+*.swo
