@@ -1,0 +1,7 @@
+# Shadow of War Game Database Dump
+# List: _StructuresBoneRotator
+# Entry count: 1
+# Entry stride: 0x28
+# Format: address|name|hex_bytes
+
+0000000066857118|DEFAULT_RECORD_NAMEBoneRotator|040A0000069A830A805511660000000028ED89680000000040D06066000000001039EC4100000000

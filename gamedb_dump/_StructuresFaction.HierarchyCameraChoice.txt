@@ -1,0 +1,7 @@
+# Shadow of War Game Database Dump
+# List: _StructuresFaction.HierarchyCameraChoice
+# Entry count: 1
+# Entry stride: 0x28
+# Format: address|name|hex_bytes
+
+0000000066737B00|DEFAULT_RECORD_NAMEFaction.HierarchyCameraChoice|010A00001D9D34DE50D70E660000000038DC3E6800000000A08F606600000000ECE1E64100000000

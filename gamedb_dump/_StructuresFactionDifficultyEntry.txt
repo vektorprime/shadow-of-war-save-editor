@@ -1,0 +1,7 @@
+# Shadow of War Game Database Dump
+# List: _StructuresFactionDifficultyEntry
+# Entry count: 1
+# Entry stride: 0x28
+# Format: address|name|hex_bytes
+
+0000000066640DD8|DEFAULT_RECORD_NAMEFactionDifficultyEntry|030A000076B7502510000866000000000845D96700000000C85D6066000000004855DF4100000000

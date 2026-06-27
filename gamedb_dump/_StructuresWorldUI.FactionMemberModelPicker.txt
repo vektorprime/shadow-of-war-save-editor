@@ -1,0 +1,7 @@
+# Shadow of War Game Database Dump
+# List: _StructuresWorldUI.FactionMemberModelPicker
+# Entry count: 1
+# Entry stride: 0x28
+# Format: address|name|hex_bytes
+
+0000000066819858|DEFAULT_RECORD_NAMEWorldUI.FactionMemberModelPicker|010A00001DCB696D802008660000000060A8846800000000A8BC606600000000FC76EA4100000000

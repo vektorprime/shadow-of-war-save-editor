@@ -1,0 +1,7 @@
+# Shadow of War Game Database Dump
+# List: Combat/States/AnimRateController
+# Entry count: 1
+# Entry stride: 0x28
+# Format: address|name|hex_bytes
+
+000000006673F2E0|Frozen|040A000040ADEF38100D0F6600000000A8753F680000000020956066000000009C11E74100000000

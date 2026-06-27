@@ -1,0 +1,7 @@
+# Shadow of War Game Database Dump
+# List: _StructuresWorldUI.FortPieceModelState
+# Entry count: 1
+# Entry stride: 0x28
+# Format: address|name|hex_bytes
+
+000000006686E4B8|DEFAULT_RECORD_NAMEWorldUI.FortPieceModelState|020A0000D7E4FFAA805911660000000048B08B6800000000B0D36066000000005447EC4100000000

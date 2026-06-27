@@ -16,6 +16,14 @@ from tkinter import ttk, filedialog, messagebox
 from pathlib import Path
 from Crypto.Cipher import AES
 
+# Try to import the game database module
+try:
+    from gamedb import GameDatabase  # noqa: F811
+    GAMEDB_AVAILABLE = True
+except ImportError:
+    GAMEDB_AVAILABLE = False
+    GameDatabase = None  # type: ignore
+
 # ── Constants ──────────────────────────────────────────────────────────
 RAW_KEY = "ad@210766@vac94Cd_?dVt5$alivjz$e"
 RAW_IV = "yuwgb@oftv@gx$t3"
@@ -46,99 +54,159 @@ EQUIPMENT_SLOTS = [
 # ── Gear Name Database ─────────────────────────────────────────────────
 GEAR_BY_SLOT = {
     "Sword": [
+        # ── Default ──
         "Urfael (Default Sword)",
+        # ── Bright Lord ──
         "Bright Lord's Sword",
+        # ── Vendetta ──
         "Sword of Vengeance",
-        "Sword of Horrors",
-        "Sword of Beasts",
+        # ── Tribe Legendary Sets ──
+        "Sword of Horrors (Terror)",
+        "Sword of Beasts (Feral)",
         "Sword of the War Machine",
         "Sword of the Marauder",
         "Sword of Mystics",
-        "Sword of Terror",
-        "Sword of War",
+        "Sword of War (Warmonger)",
+        "Sword of Darkness (Dark)",
+        # ── DLC Tribes ──
         "Sword of the Slaughter Tribe",
         "Sword of the Outlaw Tribe",
+        # ── Ringwraith ──
         "Sword of the Ringwraith",
+        # ── Epic / Rare / Common drop slots ──
+        "Sword — Epic #1",
+        "Sword — Epic #2",
+        "Sword — Epic #3",
+        "Sword — Epic #4",
+        "Sword — Epic #5",
+        "Sword — Rare #1",
+        "Sword — Rare #2",
+        "Sword — Rare #3",
+        "Sword — Common #1",
+        "Sword — Common #2",
+        "Sword — Common #3",
         "Unknown Sword",
     ],
     "Dagger": [
         "Acharn (Default Dagger)",
         "Bright Lord's Dagger",
         "Dagger of Vengeance",
-        "Dagger of Horrors",
-        "Dagger of Beasts",
+        "Dagger of Horrors (Terror)",
+        "Dagger of Beasts (Feral)",
         "Dagger of the War Machine",
         "Dagger of the Marauder",
         "Dagger of Mystics",
-        "Dagger of Terror",
-        "Dagger of War",
+        "Dagger of War (Warmonger)",
+        "Dagger of Darkness (Dark)",
         "Dagger of the Slaughter Tribe",
         "Dagger of the Outlaw Tribe",
         "Dagger of the Ringwraith",
+        "Dagger — Epic #1",
+        "Dagger — Epic #2",
+        "Dagger — Epic #3",
+        "Dagger — Rare #1",
+        "Dagger — Rare #2",
+        "Dagger — Common #1",
+        "Dagger — Common #2",
         "Unknown Dagger",
     ],
     "Bow": [
         "Azkar (Default Bow)",
         "Bright Lord's Bow",
         "Longbow of Vengeance",
-        "Hammer of Horrors",
-        "Bow of Beasts",
+        "Hammer of Horrors (Terror)",
+        "Bow of Beasts (Feral)",
         "Hammer of the War Machine",
         "Bow of the Marauder",
         "Bow of Mystics",
-        "Hammer of Terror",
-        "Hammer of War",
+        "Hammer of War (Warmonger)",
+        "Hammer of Darkness (Dark)",
         "Bow of the Slaughter Tribe",
         "Bow of the Outlaw Tribe",
         "Hammer of the Ringwraith",
+        "Bow — Epic #1",
+        "Bow — Epic #2",
+        "Bow — Epic #3",
+        "Hammer — Epic #1",
+        "Hammer — Epic #2",
+        "Bow — Rare #1",
+        "Bow — Rare #2",
+        "Hammer — Rare #1",
+        "Bow — Common #1",
+        "Bow — Common #2",
         "Unknown Bow",
     ],
     "Armor": [
         "Ranger Armor (Default)",
         "Bright Lord's Armor",
         "Armor of Vengeance",
-        "Armor of Horrors",
-        "Armor of Beasts",
+        "Armor of Horrors (Terror)",
+        "Armor of Beasts (Feral)",
         "Armor of the War Machine",
         "Armor of the Marauder",
         "Armor of Mystics",
-        "Armor of Terror",
-        "Armor of War",
+        "Armor of War (Warmonger)",
+        "Armor of Darkness (Dark)",
         "Armor of the Slaughter Tribe",
         "Armor of the Outlaw Tribe",
         "Armor of the Ringwraith",
+        "Armor — Epic #1",
+        "Armor — Epic #2",
+        "Armor — Epic #3",
+        "Armor — Epic #4",
+        "Armor — Rare #1",
+        "Armor — Rare #2",
+        "Armor — Rare #3",
+        "Armor — Common #1",
+        "Armor — Common #2",
         "Unknown Armor",
     ],
     "Cloak": [
         "Ranger Cloak (Default)",
         "Bright Lord's Cloak",
         "Cloak of Vengeance",
-        "Cloak of Horrors",
-        "Cloak of Beasts",
+        "Cloak of Horrors (Terror)",
+        "Cloak of Beasts (Feral)",
         "Cloak of the War Machine",
         "Cloak of the Marauder",
         "Cloak of Mystics",
-        "Cloak of Terror",
-        "Cloak of War",
+        "Cloak of War (Warmonger)",
+        "Cloak of Darkness (Dark)",
         "Cloak of the Slaughter Tribe",
         "Cloak of the Outlaw Tribe",
         "Cloak of the Ringwraith",
+        "Cloak — Epic #1",
+        "Cloak — Epic #2",
+        "Cloak — Epic #3",
+        "Cloak — Rare #1",
+        "Cloak — Rare #2",
+        "Cloak — Common #1",
+        "Cloak — Common #2",
         "Unknown Cloak",
     ],
     "Ring": [
         "New Ring (Default)",
         "Bright Lord's Rune",
         "Ring of Vengeance",
-        "Rune of Horrors",
-        "Rune of Beasts",
+        "Rune of Horrors (Terror)",
+        "Rune of Beasts (Feral)",
         "Rune of the War Machine",
         "Rune of the Marauder",
         "Rune of Mystics",
-        "Rune of Terror",
-        "Rune of War",
+        "Rune of War (Warmonger)",
+        "Rune of Darkness (Dark)",
         "Rune of the Slaughter Tribe",
         "Rune of the Outlaw Tribe",
         "Rune of the Ringwraith",
+        "Rune — Epic #1",
+        "Rune — Epic #2",
+        "Rune — Epic #3",
+        "Rune — Epic #4",
+        "Rune — Rare #1",
+        "Rune — Rare #2",
+        "Rune — Rare #3",
+        "Rune — Common #1",
+        "Rune — Common #2",
         "Unknown Ring",
     ],
 }
@@ -265,9 +333,17 @@ class SlotBasedEditor(tk.Tk):
         self.iuc_items = []
         self.dirty = False
 
+        # Game database (from dump_gamedb.lua output)
+        self.gamedb = None
+        if GAMEDB_AVAILABLE:
+            self.gamedb = GameDatabase()
+
         # Per-slot: which IVGD item is "equipped" for this slot
         # (represented by its index in self.ivgd_items, or None)
         self.slot_equipped = {s["name"]: None for s in EQUIPMENT_SLOTS}
+
+        # Mapping: IVGD item_id (uint32) → user-chosen gear name
+        self.id_to_name: dict = {}
 
         # ── Menu ──
         menubar = tk.Menu(self)
@@ -281,8 +357,8 @@ class SlotBasedEditor(tk.Tk):
         menubar.add_cascade(label="File", menu=file_menu)
 
         tools_menu = tk.Menu(menubar, tearoff=0)
-        tools_menu.add_command(label="Unequip All Gear", command=self.unequip_all)
-        tools_menu.add_command(label="Load Reference Save...", command=self.load_reference)
+        if self.gamedb and self.gamedb.is_loaded:
+            tools_menu.add_command(label="Search GameDB...", command=self.search_gamedb)
         menubar.add_cascade(label="Tools", menu=tools_menu)
 
         self.bind("<Control-o>", lambda e: self.open_file())
@@ -299,7 +375,9 @@ class SlotBasedEditor(tk.Tk):
 
         ttk.Label(top, text="Steam ID:").pack(side=tk.LEFT, padx=(20, 2))
         self.steam_id_var = tk.StringVar(value="0x00000000")
-        ttk.Entry(top, textvariable=self.steam_id_var, width=12).pack(side=tk.LEFT, padx=2)
+        self._steam_id_updating = False  # guard against recursive trace
+        self.steam_id_var.trace_add("write", self._on_steam_id_change)
+        ttk.Entry(top, textvariable=self.steam_id_var, width=20).pack(side=tk.LEFT, padx=2)
 
         ttk.Button(top, text="Re-load", command=lambda: self.open_file(self.filepath)).pack(
             side=tk.LEFT, padx=10)
@@ -326,6 +404,87 @@ class SlotBasedEditor(tk.Tk):
         # Bottom status
         self.bottom_label = ttk.Label(self, text="Ready.", foreground="gray")
         self.bottom_label.pack(fill=tk.X, padx=5, pady=2)
+
+        # Load game database if available
+        if self.gamedb and self.gamedb.is_loaded:
+            self._build_gear_from_gamedb()
+
+    # ── Game Database Integration ──────────────────────────────────
+    def _build_gear_from_gamedb(self):
+        """Enrich GEAR_BY_SLOT from the dumped game database."""
+        if not self.gamedb or not self.gamedb.is_loaded:
+            return
+
+        total_entries = len(self.gamedb._all_entries_by_name)
+
+        # Update status
+        self.status_label.config(
+            text=f"GameDB: {len(self.gamedb.lists)} lists, {total_entries} entries",
+            foreground="blue")
+
+    def _on_steam_id_change(self, *_args):
+        """Auto-convert decimal input to 0x hex format."""
+        if self._steam_id_updating:
+            return
+        raw = self.steam_id_var.get().strip()
+        if not raw or raw.startswith("0x") or raw.startswith("0X"):
+            return
+        try:
+            val = int(raw)
+            self._steam_id_updating = True
+            self.steam_id_var.set(f"0x{val:08X}")
+            self._steam_id_updating = False
+        except ValueError:
+            pass
+
+    def search_gamedb(self):
+        """Open a dialog to search the game database."""
+        if not self.gamedb or not self.gamedb.is_loaded:
+            messagebox.showinfo("GameDB", "Game database not loaded.\nRun dump_gamedb via Cheat Engine and copy gamedb_dump/ here.")
+            return
+
+        dialog = tk.Toplevel(self)
+        dialog.title("Search Game Database")
+        dialog.geometry("600x500")
+        dialog.transient(self)
+
+        frame = ttk.Frame(dialog, padding=5)
+        frame.pack(fill=tk.BOTH, expand=True)
+
+        ttk.Label(frame, text="Pattern:").pack(side=tk.LEFT)
+        search_var = tk.StringVar()
+        search_entry = ttk.Entry(frame, textvariable=search_var, width=40)
+        search_entry.pack(side=tk.LEFT, padx=5)
+        search_entry.focus_set()
+
+        result_text = tk.Text(dialog, wrap=tk.NONE, font=("Consolas", 9))
+        result_text.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
+        scrollbar = ttk.Scrollbar(result_text, orient=tk.VERTICAL, command=result_text.yview)
+        result_text.config(yscrollcommand=scrollbar.set)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+        xscroll = ttk.Scrollbar(dialog, orient=tk.HORIZONTAL, command=result_text.xview)
+        result_text.config(xscrollcommand=xscroll.set)
+        xscroll.pack(side=tk.BOTTOM, fill=tk.X)
+
+        def do_search(*_args):
+            pattern = search_var.get().strip()
+            result_text.delete("1.0", tk.END)
+            if not pattern or len(pattern) < 2:
+                result_text.insert("1.0", "Type at least 2 characters to search.")
+                return
+            results = self.gamedb.search(pattern)
+            if not results:
+                result_text.insert("1.0", f"No entries found matching '{pattern}'")
+                return
+            lines = [f"{len(results)} entries matching '{pattern}':\n"]
+            for list_name, entry in results:
+                lines.append(f"[{list_name}] 0x{entry.address:016X}  {entry.name}")
+            result_text.insert("1.0", "\n".join(lines))
+
+        search_var.trace_add("write", lambda *a: do_search())
+        search_entry.bind("<Return>", do_search)
+
+        ttk.Button(dialog, text="Close", command=dialog.destroy).pack(pady=5)
 
     # ── Equipment Tab ──────────────────────────────────────────────
     def build_equip_tab(self):
@@ -451,12 +610,13 @@ class SlotBasedEditor(tk.Tk):
                 eq_off = best_item["abs_offset"] + 7
                 self.decrypted[eq_off] = 1
                 best_item["eq"] = 1
-                # Also set the slot byte if needed
                 self.decrypted[best_item["abs_offset"] + 6] = target_slot_byte
                 changes.append(f"{slot_name}: {chosen}")
                 w["item_idx"] = self.ivgd_items.index(best_item)
-                w["label"].config(
-                    text=f"Equipped 0x{best_item['id']:08X}", foreground="green")
+                # Store name mapping for this item ID
+                if not chosen.startswith("[0x"):
+                    self.id_to_name[best_item["id"]] = chosen
+                w["label"].config(text=chosen, foreground="green")
             else:
                 # Try any item regardless of slot
                 for item in self.ivgd_items:
@@ -470,8 +630,8 @@ class SlotBasedEditor(tk.Tk):
                     best_item["eq"] = 1
                     best_item["slot"] = target_slot_byte
                     changes.append(f"{slot_name}: {chosen} (new slot)")
-                    w["label"].config(
-                        text=f"Equipped 0x{best_item['id']:08X}", foreground="orange")
+                    w["label"].config(text=chosen, foreground="orange")
+                    w["item_idx"] = self.ivgd_items.index(best_item)
 
         self.dirty = True
         if changes:
@@ -506,14 +666,16 @@ class SlotBasedEditor(tk.Tk):
             if target_slot in equipped_by_slot and equipped_by_slot[target_slot]:
                 item = equipped_by_slot[target_slot][0]  # First equipped item for this slot
                 w["item_idx"] = self.ivgd_items.index(item)
-                w["label"].config(
-                    text=f"ID: 0x{item['id']:08X} (eq)", foreground="green")
-                # Try to match to a known gear name
-                matched = False
-                for name in GEAR_BY_SLOT.get(slot_name, []):
-                    # For now, just leave the dropdown on the item ID
-                    pass
-                w["combo"].set(f"[0x{item['id']:08X}]")
+                item_id = item['id']
+                # Resolve name from stored mapping, or show raw ID
+                name = self.id_to_name.get(item_id)
+                if name:
+                    w["label"].config(text=name, foreground="green")
+                    w["combo"].set(name)
+                else:
+                    w["label"].config(
+                        text=f"ID: 0x{item_id:08X} (eq)", foreground="green")
+                    w["combo"].set(f"[0x{item_id:08X}]")
             else:
                 # Try to find any equipped item that might match
                 w["combo"].set("(none)")

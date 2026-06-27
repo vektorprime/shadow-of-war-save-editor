@@ -1,0 +1,7 @@
+# Shadow of War Game Database Dump
+# List: _StructuresFactionLootRarityRank
+# Entry count: 1
+# Entry stride: 0x28
+# Format: address|name|hex_bytes
+
+000000006668D400|DEFAULT_RECORD_NAMEFactionLootRarityRank|020A0000C8694355D08308660000000008D8E16700000000207F606600000000E0ADE14100000000

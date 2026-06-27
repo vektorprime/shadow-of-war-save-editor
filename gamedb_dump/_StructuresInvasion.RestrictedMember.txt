@@ -1,0 +1,7 @@
+# Shadow of War Game Database Dump
+# List: _StructuresInvasion.RestrictedMember
+# Entry count: 1
+# Entry stride: 0x28
+# Format: address|name|hex_bytes
+
+000000006673BF60|DEFAULT_RECORD_NAMEInvasion.RestrictedMember|020A0000EC66C62C20F70E6600000000A82B3F68000000000892606600000000F4F2E64100000000

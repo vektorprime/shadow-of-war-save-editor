@@ -1,0 +1,7 @@
+# Shadow of War Game Database Dump
+# List: _StructuresFactionBundleEntryInner
+# Entry count: 1
+# Entry stride: 0x28
+# Format: address|name|hex_bytes
+
+0000000066736758|DEFAULT_RECORD_NAMEFactionBundleEntryInner|020A0000BF48D78030D70E660000000050D73E6800000000488F60660000000074E1E64100000000

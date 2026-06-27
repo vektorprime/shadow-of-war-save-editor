@@ -1,0 +1,7 @@
+# Shadow of War Game Database Dump
+# List: _StructuresMoraleInfluence
+# Entry count: 1
+# Entry stride: 0x28
+# Format: address|name|hex_bytes
+
+0000000066658220|DEFAULT_RECORD_NAMEMoraleInfluence|020A0000D802A105D026086600000000F049DB6700000000986D6066000000003CCFDF4100000000

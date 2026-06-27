@@ -1,0 +1,7 @@
+# Shadow of War Game Database Dump
+# List: _StructuresWeather.StaticFXPredicate
+# Entry count: 1
+# Entry stride: 0x28
+# Format: address|name|hex_bytes
+
+0000000066739520|DEFAULT_RECORD_NAMEWeather.StaticFXPredicate|010A0000B15C312C60F50E6600000000C8FE3E68000000005090606600000000ACE6E64100000000

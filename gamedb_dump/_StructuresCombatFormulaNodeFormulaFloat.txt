@@ -1,0 +1,7 @@
+# Shadow of War Game Database Dump
+# List: _StructuresCombatFormulaNodeFormulaFloat
+# Entry count: 1
+# Entry stride: 0x28
+# Format: address|name|hex_bytes
+
+0000000066835398|DEFAULT_RECORD_NAMECombatFormulaNodeFormulaFloat|020A0000BF4A6CEE70FE10660000000090C086680000000000C86066000000003C3BEB4100000000

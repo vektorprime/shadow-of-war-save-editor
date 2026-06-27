@@ -1,0 +1,7 @@
+# Shadow of War Game Database Dump
+# List: _StructuresCombatAttackAnimationData
+# Entry count: 1
+# Entry stride: 0x28
+# Format: address|name|hex_bytes
+
+00000000667319B8|DEFAULT_RECORD_NAMECombatAttackAnimationData|360A00009F0CB92BD0540E6600000000109E3E6800000000E08C6066000000000064E64100000000

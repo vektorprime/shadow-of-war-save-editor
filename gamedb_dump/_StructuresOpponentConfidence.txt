@@ -1,0 +1,7 @@
+# Shadow of War Game Database Dump
+# List: _StructuresOpponentConfidence
+# Entry count: 1
+# Entry stride: 0x28
+# Format: address|name|hex_bytes
+
+0000000066679278|DEFAULT_RECORD_NAMEOpponentConfidence|020A0000D249FBA6D06B0866000000007067E06700000000E076606600000000E436E14100000000

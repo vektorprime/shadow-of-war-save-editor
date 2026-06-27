@@ -1,0 +1,7 @@
+# Shadow of War Game Database Dump
+# List: _StructuresInterface.NavMarkerCustomQuadList
+# Entry count: 1
+# Entry stride: 0x28
+# Format: address|name|hex_bytes
+
+000000006673BD58|DEFAULT_RECORD_NAMEInterface.NavMarkerCustomQuadList|020A00009A2DCB1CE0F60E6600000000982A3F6800000000B09160660000000078F2E64100000000

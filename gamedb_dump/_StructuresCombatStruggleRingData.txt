@@ -1,0 +1,7 @@
+# Shadow of War Game Database Dump
+# List: _StructuresCombatStruggleRingData
+# Entry count: 1
+# Entry stride: 0x28
+# Format: address|name|hex_bytes
+
+00000000668165C0|DEFAULT_RECORD_NAMECombatStruggleRingData|090A000056188F3E10C4106600000000A85184680000000038B96066000000008C50EA4100000000

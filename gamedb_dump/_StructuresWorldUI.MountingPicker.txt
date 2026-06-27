@@ -1,0 +1,7 @@
+# Shadow of War Game Database Dump
+# List: _StructuresWorldUI.MountingPicker
+# Entry count: 1
+# Entry stride: 0x28
+# Format: address|name|hex_bytes
+
+000000006680DF80|DEFAULT_RECORD_NAMEWorldUI.MountingPicker|010A00002BE7D13C8020086600000000408083680000000010B4606600000000FC19EA4100000000
